@@ -14,9 +14,9 @@ Document at least 3 bugs you found. Add rows as needed.
 
 | Input | Expected Behavior | Actual Behavior | Console Output / Error |
 |-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Secret 50, guess 60 | Hint should say Too High / go lower | Message says Go HIGHER | No crash |
+| Secret 50, guess 40 | Hint should say Too Low / go higher | Message says Go LOWER | No crash |
+| Run pytest | check_guess tests should execute | All 3 tests fail with NotImplementedError | NotImplementedError in logic_utils.py |
 
 ---
 
