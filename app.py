@@ -1,7 +1,12 @@
 import random
 import streamlit as st
-from logic_utils import check_guess
-
+from logic_utils import (
+    get_range_for_difficulty,
+    parse_guess,
+    check_guess,
+    update_score,
+)
+'''
 def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":
         return 1, 20
@@ -29,7 +34,7 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-'''
+
 def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
@@ -46,7 +51,7 @@ def check_guess(guess, secret):
         if g > secret:
             return "Too High", "📈 Go HIGHER!"
         return "Too Low", "📉 Go LOWER!"
-'''
+
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
@@ -64,7 +69,7 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
         return current_score - 5
 
     return current_score
-
+'''
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
 st.title("🎮 Game Glitch Investigator")
@@ -188,3 +193,23 @@ if submit:
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
+
+
+def test_parse_valid_guess():
+    ok, guess, err = parse_guess("42")
+
+    assert ok is True
+    assert guess == 42
+    assert err is None
+
+
+def test_parse_invalid_guess():
+    ok, guess, err = parse_guess("hello")
+
+    assert ok is False
+    assert guess is None
+    assert err == "That is not a number."
+
+
+def test_easy_range():
+    assert get_range_for_difficulty("Easy") == (1, 20)
